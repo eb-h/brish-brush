@@ -7,7 +7,8 @@
 		"node": ">=10"
 	},
 	"scripts": {
-		"dev": "node cli.js"
+    "dev": "node cli.js",
+    "prettier": "prettier --write \"**/*.js\""
 	},
 	"files": [
 		"cli.js",
@@ -30,6 +31,7 @@
 		"eslint-plugin-react": "^7.20.5",
 		"eslint-plugin-react-hooks": "^4.0.8",
 		"ink-testing-library": "^2.0.1",
+		"prettier": "^2.4.1",
 		"xo": "^0.32.1"
 	},
 	"ava": {

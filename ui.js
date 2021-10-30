@@ -1,6 +1,6 @@
 'use strict';
 const React = require('react');
-const {Text, Box, useApp, useInput} = require('ink');
+const { Text, Box, useApp, useInput } = require('ink');
 
 const Brushing = (time, color, text, brushLocation) => (
 	<Box flexDirection="column">
@@ -22,7 +22,7 @@ const Time = {
 	Prep: 6,
 	Brushing: 10,
 	Swap: 3,
-	Congratulation: 10
+	Congratulation: 10,
 };
 
 const State = {
@@ -31,7 +31,7 @@ const State = {
 	BrushingTop: 'brushingTop',
 	BrushingBottom: 'brushingBottom',
 	SwapConfirmation: 'swap',
-	Congratulation: 'congrats'
+	Congratulation: 'congrats',
 };
 
 const useCounter = () => {
@@ -39,7 +39,7 @@ const useCounter = () => {
 
 	React.useEffect(() => {
 		const timer = setInterval(() => {
-			setCounter(prevCounter => prevCounter + 1); // eslint-disable-line unicorn/prevent-abbreviations
+			setCounter((prevCounter) => prevCounter + 1); // eslint-disable-line unicorn/prevent-abbreviations
 		}, 500);
 
 		return () => {
@@ -53,13 +53,13 @@ const useCounter = () => {
 };
 
 const useBrushState = () => {
-	const {exit} = useApp();
+	const { exit } = useApp();
 	const [counter, resetCount] = useCounter();
 
 	const [brushState, setBrushState] = React.useState(State.Welcome);
 
 	useInput(
-		input => {
+		(input) => {
 			if (input === 'y') {
 				if (brushState === State.Welcome) {
 					resetCount();
@@ -105,8 +105,8 @@ const App = () => {
 		return (
 			<Text color="yellow">
 				Welcome to <Text color="green">Brish</Text>{' '}
-				<Text color="blue">Brush</Text>. You&apos;ll be brushing the top of your
-				mouth to begin with. Press &apos;y&apos; to begin!
+				<Text color="blue">Brush</Text>. You&apos;ll be brushing the top
+				of your mouth to begin with. Press &apos;y&apos; to begin!
 			</Text>
 		);
 	}
@@ -127,23 +127,23 @@ const App = () => {
 
 	if (state === State.BrushingTop || state === State.BrushingBottom) {
 		const secondsLeft =
-			state === State.BrushingTop ?
-				Time.Brushing - (count / 2) :
-				(Time.Brushing / 2) - (count / 2);
+			state === State.BrushingTop
+				? Time.Brushing - count / 2
+				: Time.Brushing / 2 - count / 2;
 
 		const locationText =
 			state === State.BrushingTop ? 'Top of Mouth' : 'Bottom of Mouth';
 
-		return count % 2 === 0 ?
-			Brushing(secondsLeft, 'green', ' brish', locationText) :
-			Brushing(secondsLeft - 0.5, 'blue', '      brush', locationText);
+		return count % 2 === 0
+			? Brushing(secondsLeft, 'green', ' brish', locationText)
+			: Brushing(secondsLeft - 0.5, 'blue', '      brush', locationText);
 	}
 
 	if (state === State.SwapConfirmation) {
 		return (
 			<Text color="yellow">
-				Please start to brush the other side of your mouth. Press &apos;y&apos; to
-				continue.
+				Please start to brush the other side of your mouth. Press
+				&apos;y&apos; to continue.
 			</Text>
 		);
 	}
